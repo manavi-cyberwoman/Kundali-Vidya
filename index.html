@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KundaliVidya – Free Vedic Kundli Online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     TOP NAV
+════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="logo">
+      <span class="logo-om">ॐ</span>
+      <div class="logo-text">
+        <span class="logo-main">KundaliVidya</span>
+        <span class="logo-sub">Free Vedic Kundli Online</span>
+      </div>
+    </div>
+    <nav class="top-nav">
+      <a href="#" class="nav-link active">Kundli</a>
+      <a href="#" class="nav-link">Horoscope</a>
+      <a href="#" class="nav-link">Numerology</a>
+      <a href="#" class="nav-link">Compatibility</a>
+      <a href="#" class="nav-link">Panchang</a>
+    </nav>
+    <button class="btn-signin">Sign In</button>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════
+     HERO / FORM
+════════════════════════════════════ -->
+<section class="hero-section" id="formSection">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-title-wrap">
+      <h1>Free Online Kundli</h1>
+      <p>Generate your Vedic Birth Chart with detailed life predictions, Dasha periods & remedies</p>
+    </div>
+
+    <div class="form-card" id="kundliForm">
+      <div class="form-tabs">
+        <button class="ftab active" data-tab="birth">Birth Details</button>
+        <button class="ftab" data-tab="advance">Advanced</button>
+      </div>
+
+      <!-- Birth Tab -->
+      <div class="ftab-content active" id="tab-birth">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Full Name *</label>
+            <input type="text" id="f-name" placeholder="Enter your full name" />
+          </div>
+          <div class="field-group">
+            <label>Gender *</label>
+            <select id="f-gender">
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field-group">
+            <label>Date of Birth *</label>
+            <input type="date" id="f-dob" />
+          </div>
+          <div class="field-group">
+            <label>Time of Birth *</label>
+            <input type="time" id="f-tob" />
+            <span class="field-hint">Use 00:00 if unknown</span>
+          </div>
+          <div class="field-group">
+            <label>Place of Birth *</label>
+            <input type="text" id="f-pob" placeholder="e.g. Mumbai, India" />
+          </div>
+        </div>
+        <div class="form-row center-row">
+          <button class="btn-generate" onclick="App.generate()">
+            <span>🔮</span> Get Free Kundli
+          </button>
+        </div>
+      </div>
+
+      <!-- Advanced Tab -->
+      <div class="ftab-content" id="tab-advance">
+        <div class="form-row">
+          <div class="field-group">
+            <label>Ascendant (if known)</label>
+            <select id="f-lagna">
+              <option value="-1">Auto Calculate</option>
+              <option value="0">Aries (Mesha)</option>
+              <option value="1">Taurus (Vrishabha)</option>
+              <option value="2">Gemini (Mithuna)</option>
+              <option value="3">Cancer (Karka)</option>
+              <option value="4">Leo (Simha)</option>
+              <option value="5">Virgo (Kanya)</option>
+              <option value="6">Libra (Tula)</option>
+              <option value="7">Scorpio (Vrishchika)</option>
+              <option value="8">Sagittarius (Dhanu)</option>
+              <option value="9">Capricorn (Makara)</option>
+              <option value="10">Aquarius (Kumbha)</option>
+              <option value="11">Pisces (Meena)</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label>Focus Area</label>
+            <select id="f-focus">
+              <option value="all">All Areas</option>
+              <option value="career">Career & Finance</option>
+              <option value="love">Love & Marriage</option>
+              <option value="health">Health</option>
+              <option value="spiritual">Spiritual</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row center-row">
+          <button class="btn-generate" onclick="App.generate()">
+            <span>🔮</span> Get Free Kundli
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="trust-row">
+      <span class="trust-item">✓ 100% Free</span>
+      <span class="trust-item">✓ Vedic (Sidereal)</span>
+      <span class="trust-item">✓ North Indian Chart</span>
+      <span class="trust-item">✓ Detailed Predictions</span>
+      <span class="trust-item">✓ Vimshottari Dasha</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     LOADING
+════════════════════════════════════ -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-box">
+    <div class="loading-spinner">
+      <svg viewBox="0 0 100 100" width="80" height="80">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#ff6b35" stroke-width="4" stroke-dasharray="60 190" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="1s" repeatCount="indefinite"/>
+        </circle>
+        <text x="50" y="58" text-anchor="middle" font-size="22" fill="#ff6b35" font-family="serif">ॐ</text>
+      </svg>
+    </div>
+    <p class="loading-msg" id="loadingMsg">Calculating planetary positions...</p>
+    <div class="loading-dots"><span></span><span></span><span></span></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     RESULTS
+════════════════════════════════════ -->
+<section class="results-section" id="resultsSection" style="display:none">
+
+  <!-- Profile Bar -->
+  <div class="profile-bar">
+    <div class="profile-bar-inner">
+      <div class="profile-info">
+        <div class="profile-avatar" id="profileAvatar">A</div>
+        <div class="profile-details">
+          <h2 id="profileName">Name</h2>
+          <div class="profile-meta" id="profileMeta"></div>
+        </div>
+      </div>
+      <div class="profile-tags" id="profileTags"></div>
+      <button class="btn-recalc" onclick="App.reset()">↩ New Kundli</button>
+    </div>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="results-layout">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="left-sidebar">
+      <div class="sidebar-nav" id="sidebarNav">
+        <button class="snav-btn active" data-panel="overview">📊 Overview</button>
+        <button class="snav-btn" data-panel="kundli-chart">🔯 Kundli Chart</button>
+        <button class="snav-btn" data-panel="planet-table">🪐 Planet Positions</button>
+        <button class="snav-btn" data-panel="houses">🏠 House Analysis</button>
+        <button class="snav-btn" data-panel="dasha">⏳ Dasha Periods</button>
+        <button class="snav-btn" data-panel="daily">🌅 Daily Prediction</button>
+        <button class="snav-btn" data-panel="weekly">📅 Weekly</button>
+        <button class="snav-btn" data-panel="monthly">🌙 Monthly</button>
+        <button class="snav-btn" data-panel="yearly">☀️ Yearly</button>
+        <button class="snav-btn" data-panel="life">🌿 Life Predictions</button>
+        <button class="snav-btn" data-panel="yoga">✦ Yogas & Doshas</button>
+        <button class="snav-btn" data-panel="panchang">📿 Panchang</button>
+        <button class="snav-btn" data-panel="compatibility">💑 Compatibility</button>
+        <button class="snav-btn" data-panel="remedies">🕉 Remedies</button>
+        <button class="snav-btn" data-panel="mantras">🎵 Mantras</button>
+      </div>
+
+      <!-- Mini chart in sidebar -->
+      <div class="sidebar-mini-chart">
+        <div class="smc-title">Lagna Chart</div>
+        <canvas id="miniChartCanvas" width="180" height="180"></canvas>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content" id="mainContent">
+      <!-- panels injected by JS -->
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="right-sidebar">
+      <div class="widget-card">
+        <div class="widget-title">🌟 Today's Highlights</div>
+        <div id="todayWidget"></div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-title">🔢 Lucky Numbers</div>
+        <div id="luckyWidget"></div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-title">💎 Your Gemstone</div>
+        <div id="gemWidget"></div>
+      </div>
+      <div class="widget-card">
+        <div class="widget-title">📅 Upcoming Transits</div>
+        <div id="transitWidget"></div>
+      </div>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-logo">ॐ KundaliVidya</div>
+    <p>Free Vedic Astrology | Kundli | Horoscope | Panchang</p>
+    <p class="footer-disc">For entertainment and spiritual guidance only. Not a substitute for professional advice.</p>
+  </div>
+</footer>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/chart.js"></script>
+<script src="js/panels.js"></script>
+<script src="js/widgets.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
